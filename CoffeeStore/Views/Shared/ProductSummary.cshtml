@@ -1,0 +1,65 @@
+﻿@using CoffeeStore.Infrastructure
+@model CoffeeStore.Models.Product
+<style>
+    .img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .card {
+        width: 300px;
+        height: 100%;
+    }
+
+    /* Thêm CSS để xóa bỏ gạch chân ở chữ trong liên kết */
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+        a:hover {
+            text-decoration: none;
+            color: inherit;
+        }
+</style>
+
+<div class="card card-outline-primary m-1 p-1">
+    <a asp-controller="Category" asp-action="ProductDetail" asp-route-id="@Model?.ProductID">
+        <img src="~/@Model?.ImageURL" class="img card-img-top" alt="@Model?.Name">
+    </a>
+    <div class="bg-faded p-1">
+        <h4>
+            <a asp-controller="Category" asp-action="ProductDetail" asp-route-id="@Model?.ProductID">
+                @Model?.Name
+            </a>
+            <span class="badge rounded-pill bg-primary text-white" style="float:right">
+                <small>@Model?.Price.ToString("N0")</small>
+            </span>
+        </h4>
+    </div>
+    @if (!string.IsNullOrEmpty(ViewBag.PhoneNumber))
+    {
+        <form id="form-@Model?.ProductID" asp-page="/Cart" method="post">
+            <input type="hidden" name="productId" value="@Model?.ProductID" />
+            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <span class="card-text p-1">
+                <button type="submit" class="btn btn-primary btn-sm pull-right" style="float:right">
+                    Add To Cart
+                </button>
+            </span>
+        </form>
+    }
+    else
+    {
+        <form action="/Login/Login" method="post">
+            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <span class="card-text p-1">
+                <button type="submit" class="btn btn-success btn-sm pull-right" style="float:right">
+                    Add To Cart
+                </button>
+            </span>
+        </form>
+    }
+
+</div>

@@ -1,0 +1,21 @@
+﻿@model CoffeeStore.Models.ViewModels.OrderViewModel
+
+<h3>Thông tin giao hàng</h3>
+<div asp-validation-summary="All" class="text-danger"></div>
+<form asp-action="Checkout" method="post">
+    <div class="form-group">
+        <label for="CustomerPhone">Số điện thoại:</label>
+        <input asp-for="CustomerPhone" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label for="CustomerName">Tên:</label>
+        <input asp-for="CustomerName" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <label for="Address">Địa chỉ:</label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <input type="hidden" asp-for="CustomerID" />
+    <button type="submit" class="btn btn-success mt-3">Hoàn thành đơn hàng</button>
+</form>

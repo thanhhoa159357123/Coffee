@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="UTF-8">
+    <title>@ViewBag.Title</title>
+    <link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    @RenderSection("Scripts", required: false)
+    <style>
+        .container {
+            font-size: 16px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            gap: 20px;
+        }
+
+        .navbar-brand {
+            color: white;
+            padding: 0 10px;
+        }
+
+        .dropdown-menu {
+            min-width: 0;
+        }
+
+        .navbar-light .navbar-nav .nav-link {
+            color: rgba(0,0,0,.5);
+        }
+
+            .navbar-light .navbar-nav .nav-link:hover, .navbar-light .navbar-nav .nav-link:focus {
+                color: rgba(0,0,0,.9);
+            }
+    </style>
+</head>
+<body>
+    <div class="bg-light text-center">
+        <div class="navbar navbar-light">
+            <a href="@Url.Action("Index", "Home")" class="text-info navbar-brand">Chill Coffee</a>
+            <a href="@Url.Action("Cafe", "Category")" class="text-info navbar-brand">Cà phê</a>
+            <a href="@Url.Action("Tea", "Category")" class="text-info navbar-brand">Trà</a>
+            <a href="@Url.Action("Crushice", "Category")" class="text-info navbar-brand">Đá xay</a>
+            <div class="dropdown">
+                <a class="text-info navbar-brand dropdown-toggle" href="#" id="menuDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Menu</a>
+                <ul class="dropdown-menu" aria-labelledby="menuDropdown">
+                    <li><a class="dropdown-item" href="@Url.Action("Category", "Category")">Tất cả</a></li>
+                    <li><a class="dropdown-item" href="@Url.Action("_CafeCategory", "Category")">Cà phê</a></li>
+                    <li><a class="dropdown-item" href="@Url.Action("_TeaCategory", "Category")">Trà</a></li>
+                    <li><a class="dropdown-item" href="@Url.Action("_CrushiceCategory", "Category")">Đá xay</a></li>
+                </ul>
+            </div>
+            @if (!string.IsNullOrEmpty(ViewBag.CustomerName))
+            {
+                <div class="dropdown">
+                    <a class="text-info navbar-brand dropdown-toggle" href="#" id="menuDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span id="loggedInUser">@ViewBag.CustomerName</span> <!-- Hiển thị số điện thoại -->
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="menuDropdown">
+                        <li><a class="dropdown-item" href="@Url.Action("HistoryOrder", "Order")">Tra cứu đơn hàng</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("InformationCustomers", "Login")">Thông tin cá nhân</a></li>
+                        <li><a class="dropdown-item" href="javascript:void(0);" onclick="confirmLogout()">Đăng xuất<i class="p-1 fas fa-sign-in-alt"></i></a></li>
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <a href=@Url.Action("Login","Login") class="text-info btn btn-light"><i class="fas fa-user"></i></a>
+            }
+        </div>
+    </div>
+    <div class="container">
+        @RenderBody()
+    </div>
+    <script>
+        function confirmLogout() {
+            if (confirm("Bạn có chắc chắn muốn đăng xuất không?")) {
+                window.location.href = "@Url.Action("Logout", "Login")";
+            }
+        }
+    </script>
+</body>
+</html>

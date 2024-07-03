@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Lịch sử đơn hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Đường dẫn tới layout chung
+}
+
+<h2 class="title text-center mt-3">Lịch sử đơn hàng</h2>
+
+@if (ViewBag.Orders != null)
+{
+    <p>Bạn đã có @ViewBag.Orders.Count đơn hàng.</p>
+}
+
+@if (ViewBag.Orders != null && ViewBag.Orders.Count > 0)
+{
+    <div class="container mt-4">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Đơn hàng số</th>
+                    <th>Sản phẩm</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in ViewBag.Orders)
+                {
+                    <tr>
+                        <td>@order.OrderID</td>
+                        <td>
+                            <ul>
+                                @foreach (var line in order.Lines)
+                                {
+                                    <li>@line.Product.Name (Số lượng: @line.Quantity)</li>
+                                }
+                            </ul>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning mt-4" role="alert">
+        Không có đơn hàng nào được tìm thấy.
+    </div>
+}

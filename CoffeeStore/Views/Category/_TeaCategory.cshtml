@@ -1,0 +1,47 @@
+﻿@model CoffeeStore.Models.ViewModels.ProductsListViewModel
+
+@{
+    ViewBag.Title = "Danh mục trà";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Đường dẫn tới layout chung
+}
+<style>
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Xếp các card theo số cột tự điều chỉnh, mỗi card tối thiểu 300px */
+        gap: 1rem; /* Khoảng cách giữa các card */
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+        height: 100%; /* Chỉnh cao độ của card */
+    }
+    .card h4 {
+        font-size: 20px; /* Thiết lập kích thước chữ cho tiêu đề */
+        margin-bottom: 0.5rem; /* Khoảng cách dưới của tiêu đề */
+    }
+
+    .card .badge small {
+        font-size: 12px; /* Thiết lập kích thước chữ cho giá sản phẩm */
+    }
+</style>
+<div class="row m-1 p-1">
+    <div id="categories" class="col-3">
+        <div class="d-grid gap-2">
+            <a href="@Url.Action("Category", "Category", new { category = "" })" class="btn btn-outline-secondary">Tất cả sản phẩm</a>
+            <a href="@Url.Action("_CafeCategory", "Category")" class="btn btn-outline-secondary category-btn">Cà phê</a>
+            <a href="@Url.Action("_CrushiceCategory", "Category")" class="btn btn-outline-secondary category-btn">Đá xay</a>
+            <a href="@Url.Action("_TeaCategory", "Category")" class="btn btn-outline-secondary category-btn">Trà</a>
+        </div>
+    </div>
+    <div class="card-container col-9">
+        @foreach (var product in Model.Products)
+        {
+            <div class="col-md-4 mb-3">
+                @await Html.PartialAsync("ProductSummary", product)
+            </div>
+        }
+    </div>
+</div>
+
+

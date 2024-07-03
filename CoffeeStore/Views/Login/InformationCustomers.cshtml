@@ -1,0 +1,40 @@
+﻿@model CoffeeStore.Models.Customer // Định nghĩa model nếu bạn muốn sử dụng model thay vì ViewBag
+
+@{
+    ViewBag.Title = "Thông tin người dùng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thông tin người dùng</h2>
+
+
+<form method="post" action="/Login/UpdateCustomer">
+    <!-- Các trường dữ liệu được điền tự động từ dữ liệu người dùng -->
+    <div class="form-group mt-3">
+        <label for="ho">Họ:</label>
+        <input type="text" class="form-control" id="ho" name="LastName" value="@ViewBag.Customer.LastName">
+    </div>
+    <div class="form-group mt-3">
+        <label for="ten">Tên:</label>
+        <input type="text" class="form-control" id="ten" name="FirstName" value="@ViewBag.Customer.FirstName">
+    </div>
+    <div class="form-group mt-3">
+        <label for="sdt">Số điện thoại:</label>
+        <input type="tel" class="form-control" id="sdt" name="sdt" value="@ViewBag.Customer.Phone" readonly>
+    </div>
+    <div class="form-group mt-3">
+        <label for="ngaysinh">Ngày sinh:</label>
+        <input type="date" class="form-control" id="ngaysinh" name="ngaysinh" value="@(((DateTime)ViewBag.Customer.NgaySinh).ToString("yyyy-MM-dd"))" readonly>
+    </div>
+    <div class="form-group mt-3">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" name="email" value="@ViewBag.Customer.Email" readonly>
+    </div>
+    <div class="form-group mt-3">
+        <label for="gender">Giới Tính:</label>
+        <input type="text" class="form-control" id="gender" name="gender" value="@ViewBag.Customer.GioiTinh" readonly>
+    </div>
+    <div class="form-group mt-3" >
+        <button type="submit" class="btn btn-primary p-2">Lưu thông tin</button>
+    </div>
+</form>

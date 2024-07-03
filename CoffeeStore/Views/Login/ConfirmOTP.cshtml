@@ -1,0 +1,38 @@
+﻿@model CoffeeStore.Models.ViewModels.ProductsListViewModel
+
+@{
+    ViewBag.Title = "Xác nhận OTP";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Nhập mã OTP</div>
+                <div class="card-body">
+                    <!-- Hiển thị thông báo lỗi nếu có -->
+                    @if (ViewBag.ErrorMessage != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewBag.ErrorMessage
+                        </div>
+                    }
+                    <form id="otpForm" action="@Url.Action("ConfirmOTP", "Login")" method="post">
+                        <div class="mb-3">
+                            <label for="otpCode" class="form-label">Mã OTP</label>
+                            <input type="text" class="form-control" id="otpCode" name="otpCode" placeholder="Nhập mã OTP" required>
+                        </div>
+                        <button type="submit" class="text-light btn btn-primary">Xác nhận</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (ViewBag.OTPCode != null)
+    {
+        <div class="alert alert-info mt-3" role="alert">
+            Mã OTP của bạn là: @ViewBag.OTPCode
+        </div>
+    }
+</div>
