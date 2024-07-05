@@ -17,6 +17,7 @@ builder.Services.AddScoped<Cart>(sp => SessionCart.GetCart(sp));
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
+builder.Services.AddServerSideBlazor();
 
 var app = builder.Build();
 
@@ -30,5 +31,8 @@ app.MapDefaultControllerRoute();
 app.MapRazorPages();
 
 CoffeeData.EnsurePopulated(app);
+
+app.MapBlazorHub();
+app.MapFallbackToPage("/admin/{*catchall}", "/Admin/Index");
 
 app.Run();

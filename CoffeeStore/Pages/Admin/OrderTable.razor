@@ -1,0 +1,58 @@
+﻿@using Microsoft.EntityFrameworkCore.Metadata.Internal;
+@using System.Globalization;
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr><th colspan="5" class="text-center">@TableTitle</th></tr>
+    </thead>
+    <tbody>
+        @if (Orders?.Count() > 0)
+        {
+            @foreach (Order o in Orders)
+            {
+                <tr>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng </th>
+                    <th>Giá tiền</th>
+                    <th>Thành tiền</th>
+                    <td>
+                        <button class="btn btn-sm btn-danger"
+                        @onclick="@(e => OrderSelected.InvokeAsync(o.OrderID))">
+                            @ButtonLabel
+                        </button>
+                    </td>
+                </tr>
+                @foreach (CartLine line in o.Lines)
+                {
+                    <tr>
+                        <td>@line.Product.Name</td>
+                        <td>@line.Quantity</td>
+                        <td>@line.Product.Price.ToString("N0", new CultureInfo("vi-VN")).Replace(",", ".")</td>
+                        <td>@((line.Quantity * line.Product.Price).ToString("N0", new CultureInfo("vi-VN")).Replace(",", "."))</td>
+                    </tr>
+                }
+                <tr>
+                    <th colspan="3" class="text-right">Tổng cộng:</th>
+                    <td class="text-right" id="total-value">@o.TotalAmount.ToString("N0", new CultureInfo("vi-VN")).Replace(",", ".")</td>
+                </tr>
+                <tr>
+                    <th class="text-right">Địa chỉ:</th>
+                    <td colspan="3" class="text-right">@o.Address</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="5" class="text-center">No Orders</td></tr>
+        }
+    </tbody>
+</table>
+@code {
+    [Parameter]
+    public string TableTitle { get; set; } = "Orders";
+    [Parameter]
+    public IEnumerable<Order> Orders { get; set; } = Enumerable.Empty<Order>();
+    [Parameter]
+    public string ButtonLabel { get; set; } = "Ship";
+    [Parameter]
+    public EventCallback<int> OrderSelected { get; set; }
+}

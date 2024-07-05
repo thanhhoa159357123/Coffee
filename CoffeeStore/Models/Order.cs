@@ -25,5 +25,7 @@ namespace CoffeeStore.Models
         [ForeignKey("CustomerID")]
         public Customer? Customer { get; set; }
 
+        [BindNever]
+        public bool Shipped { get; set; }
     }
 }
