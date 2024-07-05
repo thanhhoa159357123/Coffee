@@ -1,5 +1,4 @@
-﻿
-namespace CoffeeStore.Models
+﻿namespace CoffeeStore.Models
 {
     public class Cart
     {
@@ -26,13 +25,25 @@ namespace CoffeeStore.Models
         }
 
         public virtual void RemoveLine(Product product) =>
-            Lines.RemoveAll(l => l.Product != null && l.Product.ProductID == product.ProductID);
+            Lines.RemoveAll(l => l.Product.ProductID == product.ProductID);
 
         public virtual void Clear() => Lines.Clear();
 
+        public virtual void UpdateQuantity(Product product, int quantity)
+        {
+            CartLine? line = Lines
+                .FirstOrDefault(p => p.Product.ProductID == product.ProductID);
+
+            if (line != null)
+            {
+                line.Quantity = quantity;
+            }
+        }
+
         public decimal ComputeTotalValue() =>
-            Lines.Sum(e => e.Product?.Price ?? 0 * e.Quantity);
+            Lines.Sum(e => e.Product.Price * e.Quantity);
     }
+
     public class CartLine
     {
         public int CartLineID { get; set; }

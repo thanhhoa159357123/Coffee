@@ -19,12 +19,14 @@ builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession();
 
 var app = builder.Build();
-app.UseStaticFiles();
 
+app.UseStaticFiles();
 app.UseSession();
 
-app.MapDefaultControllerRoute();
+app.UseRouting();
+app.UseAuthorization();
 
+app.MapDefaultControllerRoute();
 app.MapRazorPages();
 
 CoffeeData.EnsurePopulated(app);

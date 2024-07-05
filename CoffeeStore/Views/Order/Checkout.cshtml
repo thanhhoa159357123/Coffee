@@ -1,21 +1,57 @@
-﻿@model CoffeeStore.Models.ViewModels.OrderViewModel
+﻿@model CoffeeStore.Models.Order
+@using System.Globalization
 
-<h3>Thông tin giao hàng</h3>
+<h3>Thông tin đơn hàng</h3>
 <div asp-validation-summary="All" class="text-danger"></div>
 <form asp-action="Checkout" method="post">
     <div class="form-group">
         <label for="CustomerPhone">Số điện thoại:</label>
-        <input asp-for="CustomerPhone" class="form-control" readonly />
+        <input type="text" class="form-control" value="@Model.Customer?.Phone" readonly />
     </div>
     <div class="form-group">
         <label for="CustomerName">Tên:</label>
-        <input asp-for="CustomerName" class="form-control" readonly />
+        <input type="text" class="form-control" value="@Model.Customer?.LastName @Model.Customer?.FirstName" readonly />
     </div>
     <div class="form-group">
         <label for="Address">Địa chỉ:</label>
         <input asp-for="Address" class="form-control" />
         <span asp-validation-for="Address" class="text-danger"></span>
     </div>
+    <div class="form-group">
+        <label>Ngày đặt:</label>
+        <input type="text" class="form-control" value="@Model.OrderDate.ToString("dd/MM/yyyy HH:mm:ss")" readonly />
+    </div>
+    <!-- Hiển thị danh sách sản phẩm -->
+    <h4>Danh sách sản phẩm đã chọn:</h4>
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Giá tiền</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var line in Model.Lines)
+            {
+                <tr>
+                    <td>@line.Product.Name</td>
+                    <td>@line.Quantity</td>
+                    <td>@line.Product.Price.ToString("N0", new CultureInfo("vi-VN")).Replace(",", ".")</td>
+                    <td>@((line.Quantity * line.Product.Price).ToString("N0", new CultureInfo("vi-VN")).Replace(",", "."))</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right">Tổng cộng:</td>
+                <td class="text-right" id="total-value">@Model.TotalAmount.ToString("N0", new CultureInfo("vi-VN")).Replace(",", ".")</td>
+            </tr>
+        </tfoot>
+    </table>
+
     <input type="hidden" asp-for="CustomerID" />
-    <button type="submit" class="btn btn-success mt-3">Hoàn thành đơn hàng</button>
+    <button class="btn btn-info text-white mt-3" asp-page="/Cart">Tiếp tục mua hàng</button>
+    <button type="submit" class="btn btn-info text-white mt-3" style="float:right">Hoàn thành đơn hàng</button>
 </form>

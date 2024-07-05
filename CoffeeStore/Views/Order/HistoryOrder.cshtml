@@ -1,30 +1,32 @@
-﻿@{
+﻿@model List<CoffeeStore.Models.Order>
+@using System.Globalization
+@{
     ViewBag.Title = "Lịch sử đơn hàng";
     Layout = "~/Views/Shared/_Layout.cshtml"; // Đường dẫn tới layout chung
 }
 
 <h2 class="title text-center mt-3">Lịch sử đơn hàng</h2>
 
-@if (ViewBag.Orders != null)
+@if (Model != null && Model.Count > 0)
 {
-    <p>Bạn đã có @ViewBag.Orders.Count đơn hàng.</p>
-}
+    <p>Bạn đã có @Model.Count đơn hàng.</p>
 
-@if (ViewBag.Orders != null && ViewBag.Orders.Count > 0)
-{
     <div class="container mt-4">
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>Đơn hàng số</th>
+                    <th>Ngày đặt hàng</th>
                     <th>Sản phẩm</th>
+                    <th>Tổng số tiền</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var order in ViewBag.Orders)
+                @foreach (var order in Model)
                 {
                     <tr>
                         <td>@order.OrderID</td>
+                        <td>@order.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
                         <td>
                             <ul>
                                 @foreach (var line in order.Lines)
@@ -33,6 +35,7 @@
                                 }
                             </ul>
                         </td>
+                        <td>@order.TotalAmount.ToString("N0", new CultureInfo("vi-VN")).Replace(",", ".")</td>
                     </tr>
                 }
             </tbody>

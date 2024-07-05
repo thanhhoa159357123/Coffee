@@ -33,7 +33,7 @@
             <a asp-controller="Category" asp-action="ProductDetail" asp-route-id="@Model?.ProductID">
                 @Model?.Name
             </a>
-            <span class="badge rounded-pill bg-primary text-white" style="float:right">
+            <span class="badge rounded-pill bg-info text-white" style="float:right">
                 <small>@Model?.Price.ToString("N0")</small>
             </span>
         </h4>
@@ -44,8 +44,8 @@
             <input type="hidden" name="productId" value="@Model?.ProductID" />
             <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
             <span class="card-text p-1">
-                <button type="submit" class="btn btn-primary btn-sm pull-right" style="float:right">
-                    Add To Cart
+                <button type="submit" class="btn btn-info btn-sm pull-right text-white" style="float:right">
+                    <i class="fas fa-plus"></i>
                 </button>
             </span>
         </form>
@@ -55,8 +55,8 @@
         <form action="/Login/Login" method="post">
             <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
             <span class="card-text p-1">
-                <button type="submit" class="btn btn-success btn-sm pull-right" style="float:right">
-                    Add To Cart
+                <button type="submit" class="btn btn-primary btn-sm pull-right text-white" style="float:right">
+                    <i class="fas fa-plus"></i>
                 </button>
             </span>
         </form>

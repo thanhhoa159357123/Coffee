@@ -1,10 +1,8 @@
 ﻿using CoffeeStore.Models;
-using CoffeeStore.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Http;
+using System;
 using System.Linq;
-using CoffeeStore.Migrations;
 
 namespace CoffeeStore.Controllers
 {
@@ -21,7 +19,6 @@ namespace CoffeeStore.Controllers
             _context = context;
         }
 
-        // Kiểm tra và duy trì session
         private void KeepSession()
         {
             var phoneNumber = HttpContext.Session.GetString("PhoneNumber");
@@ -38,14 +35,11 @@ namespace CoffeeStore.Controllers
 
         public IActionResult Checkout()
         {
-            // Duy trì session của người dùng đã đăng nhập
             KeepSession();
-
-            // Lấy thông tin khách hàng từ session hoặc cơ sở dữ liệu
+            var model = new Order();
             var phoneNumber = HttpContext.Session.GetString("PhoneNumber");
             if (string.IsNullOrEmpty(phoneNumber))
             {
-                // Nếu không có số điện thoại trong session, chuyển hướng đến trang đăng nhập
                 return RedirectToAction("Login", "Login");
             }
 
@@ -53,65 +47,65 @@ namespace CoffeeStore.Controllers
 
             if (customer == null)
             {
-                // Xử lý khi không tìm thấy khách hàng
                 return RedirectToAction("Error", "Home");
             }
-
-            var model = new OrderViewModel
-            {
-                CustomerID = customer.CustomerID,
-                CustomerName = $"{customer.FirstName} {customer.LastName}",
-                CustomerPhone = customer.Phone
-            };
+            // Truyền thông tin từ Cart vào model Order
+            model.Customer = customer;
+            model.OrderDate = DateTime.Now;
+            model.Lines = _cart.Lines.ToArray();
+            model.TotalAmount = _cart.ComputeTotalValue();
 
             return View(model);
+
         }
 
         [HttpPost]
-        public IActionResult Checkout(OrderViewModel model)
+        public IActionResult Checkout(Order order)
         {
-            if (_cart.Lines.Count() == 0)
+            if (_cart.Lines.Count == 0)
             {
-                ModelState.AddModelError("", "Sorry, your cart is empty!");
+                ModelState.AddModelError("", "Xin lỗi, giỏ hàng của bạn đang trống!");
             }
 
             if (ModelState.IsValid)
             {
-                var order = new Order
-                {
-                    CustomerID = model.CustomerID,
-                    Address = model.Address,
-                    Lines = _cart.Lines.ToArray()
-                };
+                order.CustomerID = _context.Customers.FirstOrDefault(c => c.Phone == HttpContext.Session.GetString("PhoneNumber")).CustomerID;
+                order.Lines = _cart.Lines.ToArray();
+                order.TotalAmount = _cart.ComputeTotalValue();
+                order.OrderDate = DateTime.Now;
 
                 _repository.SaveOrder(order);
                 _cart.Clear();
+
                 return RedirectToPage("/Completed", new { orderId = order.OrderID });
             }
-            else
-            {
-                return View(model);
-            }
+
+
+            return View(order);
         }
 
-        // Lịch sử đơn hàng
         public IActionResult HistoryOrder()
         {
-            // Duy trì session của người dùng đã đăng nhập
             KeepSession();
 
             var phoneNumber = HttpContext.Session.GetString("PhoneNumber");
+            if (string.IsNullOrEmpty(phoneNumber))
+            {
+                return RedirectToAction("Login", "Login");
+            }
+
             var customer = _context.Customers.FirstOrDefault(c => c.Phone == phoneNumber);
-            // Lấy danh sách đơn hàng của người dùng cùng với chi tiết đơn hàng
+            if (customer == null)
+            {
+                return RedirectToAction("Error", "Home");
+            }
+
             var orders = _repository.Orders
-                        .Where(o => o.CustomerID == customer.CustomerID)
-                        .Include(o => o.Lines)
-                        .ThenInclude(l => l.Product)
-                        .ToList();
+                .Include(o => o.Lines)
+                .Where(o => o.CustomerID == customer.CustomerID)
+                .ToList();
 
-            ViewBag.Orders = orders;
-
-            return View();
+            return View(orders);
         }
     }
 }

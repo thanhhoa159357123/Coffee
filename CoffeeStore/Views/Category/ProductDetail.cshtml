@@ -6,8 +6,9 @@
 }
 
 <style>
-    .product-img {
+    img {
         max-width: 100%;
+        height: 100%;
         border-radius: 10px;
     }
 
@@ -35,20 +36,25 @@
 <div class="container product-details">
     <div class="row">
         <div class="col-md-6">
-            <img src="~/@Model?.ImageURL" alt="@Model.Name" class="product-img" />
+            <img src="~/@Model?.ImageURL" alt="@Model?.Name" class="product-img" />
         </div>
         <div class="col-md-6">
-            <h2>@Model.Name</h2>
-            <p>@Model.Description</p>
-            <div class="product-price">@Model.Price.ToString("N0") VND</div>
-            <form asp-controller="Cart" asp-action="AddToCart" method="post" class="mt-3">
-                <input type="hidden" name="productId" value="@Model.ProductID" />
+            <h2>@Model?.Name</h2>
+            <div class="product-price">@Model?.Price.ToString("N0") VND</div>
+            <form id="form-@Model?.ProductID" asp-page="/Cart" method="post">
+                <input type="hidden" name="productId" value="@Model?.ProductID" />
+                <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
                 <div class="form-group">
                     <label for="quantity">Số lượng:</label>
                     <input type="number" name="quantity" value="1" min="1" class="form-control" style="width: 100px;" />
                 </div>
-                <button type="submit" class="btn btn-primary btn-lg mt-3">Thêm vào giỏ</button>
+                <span class="card-text p-1">
+                    <button type="submit" class="btn btn-primary btn-sm pull-right mt-3" style="float:left">
+                        Thêm vào giỏ hàng
+                    </button>
+                </span>
             </form>
         </div>
     </div>
+    <p class="mt-3 border-top border-primary">@Model?.Description</p>
 </div>
