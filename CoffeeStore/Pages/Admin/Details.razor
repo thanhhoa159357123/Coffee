@@ -1,4 +1,6 @@
 ﻿@page "/admin/products/details/{id:long}"
+@using System.Globalization
+@inherits OwningComponentBase<ICoffeeRepository>
 <h3 class="bg-info text-white text-center p-1">Details</h3>
 <table class="table table-sm table-bordered table-striped">
     <tbody>
@@ -20,11 +22,13 @@
         </tr>
         <tr>
             <th>Giá tiền</th>
-            <td>@Product?.Price.ToString("C")</td>
+            <td>@Product?.Price.ToString("N0", new CultureInfo("vi-VN")).Replace(",", ".")</td>
         </tr>
         <tr>
             <th>Hình minh họa</th>
-            <td>@Product?.ImageURL</td>
+            <td>
+                <img src="@Product?.ImageURL" alt="@Product?.Name" style="max-height: 100px; max-width: 100px;" />
+            </td>
         </tr>
     </tbody>
 </table>

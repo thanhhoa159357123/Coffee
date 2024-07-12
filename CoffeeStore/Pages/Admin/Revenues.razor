@@ -1,0 +1,38 @@
+﻿@page "/admin/revenue"
+@inherits OwningComponentBase<ICoffeeRepository>
+
+<h3 class="bg-info text-white text-center p-1">Revenue</h3>
+
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Tháng</th>
+            <th>Doanh thu</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var revenue in MonthlyRevenues)
+        {
+            <tr>
+                <td>@revenue.Month.ToString("MMMM yyyy")</td>
+                <td>@revenue.Amount.ToString("N0", new CultureInfo("vi-VN")).Replace(",", ".") VND</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    public ICoffeeRepository Repository => Service;
+    public List<MonthlyRevenue> MonthlyRevenues { get; set; } = new List<MonthlyRevenue>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        MonthlyRevenues = await Repository.GetMonthlyRevenuesAsync();
+    }
+}
+
+public class MonthlyRevenue
+{
+    public DateTime Month { get; set; }
+    public decimal Amount { get; set; }
+}
