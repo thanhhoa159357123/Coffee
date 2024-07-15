@@ -1,0 +1,47 @@
+﻿.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Xếp các card theo số cột tự điều chỉnh, mỗi card tối thiểu 300px */
+    gap: 1rem; /* Khoảng cách giữa các card */
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Chỉnh cao độ của card */
+}
+
+@keyframes blue-text-animation {
+    0% {
+        color: #003366;
+    }
+    /* Navy Blue */
+    17% {
+        color: #004080;
+    }
+    /* Dark Blue */
+    34% {
+        color: #0059b3;
+    }
+    /* Royal Blue */
+    50% {
+        color: #0066cc;
+    }
+    /* Azure */
+    67% {
+        color: #3399ff;
+    }
+    /* Sky Blue */
+    84% {
+        color: #66ccff;
+    }
+    /* Light Sky Blue */
+    100% {
+        color: #00ffff;
+    }
+    /* Cyan */
+}
+
+.rainbow-title {
+    margin: 20px;
+    animation: blue-text-animation 3s infinite;
+}

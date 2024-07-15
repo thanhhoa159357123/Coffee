@@ -19,6 +19,7 @@
                     <th>Ngày đặt hàng</th>
                     <th>Sản phẩm</th>
                     <th>Tổng số tiền</th>
+                    <th>Trạng thái</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,6 +37,16 @@
                             </ul>
                         </td>
                         <td>@order.TotalAmount.ToString("N0", new CultureInfo("vi-VN")).Replace(",", ".")</td>
+                        <td>
+                            @if (order.Shipped)
+                            {
+                                <span class="badge bg-success m-2">Đã nhận đơn hàng</span>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn btn-primary btn-sm m-2" disabled>Đã nhận đơn hàng</button>
+                            }
+                        </td>
                     </tr>
                 }
             </tbody>

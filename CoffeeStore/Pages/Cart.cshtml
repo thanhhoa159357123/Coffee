@@ -5,23 +5,24 @@
     ViewData["Title"] = "Giỏ hàng của bạn";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <style>
-    .title {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        font-size: 20px;
+
+    .product-img {
+        width: 100px; /* Đặt chiều rộng của hình ảnh */
+        height: auto; /* Giữ tỉ lệ khung hình của hình ảnh */
     }
 </style>
 
-<div class="title">
-    Giỏ hàng của bạn
-</div>
+<link rel="stylesheet" href="~/css/style.css" />
+<h4 class="title text-center mt-3 rainbow-title">
+    Giỏ hàng của bạn <i class="p-1 fas fa-shopping-cart"></i>
+</h4>
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>Số lượng</th>
             <th>Sản phẩm</th>
+            <th>Hình ảnh</th>
             <th class="text-right">Giá</th>
             <th class="text-right">Tổng</th>
             <th></th>
@@ -39,6 +40,7 @@
                     </form>
                 </td>
                 <td class="text-left">@line.Product.Name</td>
+                <td class="text-left"><img src="@line.Product.ImageURL" alt="@line.Product.Name" class="product-img" /></td>
                 <td class="text-right">@((line.Product.Price).ToString("N0", new CultureInfo("vi-VN")).Replace(",", "."))</td>
                 <td class="text-right total-price">@((line.Quantity * line.Product.Price).ToString("N0", new CultureInfo("vi-VN")).Replace(",", "."))</td>
                 <td class="text-center">
@@ -59,6 +61,6 @@
     </tfoot>
 </table>
 <div class="text-center">
-    <a class="btn btn-primary" href="@Model?.ReturnUrl">Tiếp tục mua hàng</a>
-    <a class="btn btn-primary" asp-action="Checkout" asp-controller="Order">Hoàn thành đơn hàng</a>
+    <a class="btn btn-primary rainbow-title " href="@Model?.ReturnUrl">Tiếp tục mua hàng</a>
+    <a class="btn btn-primary rainbow-title" asp-action="Checkout" asp-controller="Order">Hoàn thành đơn hàng</a>
 </div>

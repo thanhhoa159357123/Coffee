@@ -3,25 +3,8 @@
     ViewBag.Title = "Trang chủ";
     Layout = "~/Views/Shared/_Layout.cshtml"; // Đường dẫn tới layout chung
 }
-<style>
-    .card-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Xếp các card theo số cột tự điều chỉnh, mỗi card tối thiểu 300px */
-        gap: 1rem; /* Khoảng cách giữa các card */
-    }
-
-    .card {
-        display: flex;
-        flex-direction: column;
-        height: 100%; /* Chỉnh cao độ của card */
-    }
-
-        .card h4 {
-            font-size: 20px; /* Thiết lập kích thước chữ cho tiêu đề */
-            margin-bottom: 0.5rem; /* Khoảng cách dưới của tiêu đề */
-        }
-</style>
-<h4 class="text-center mt-3">Welcome to Chill Coffee!</h4>
+<link rel="stylesheet" href="~/css/style.css" />
+<h4 class="title text-center mt-3 rainbow-title">Welcome to Chill Coffee!</h4>
 
 <div class="card-container">
     @foreach (var product in Model.Products)
