@@ -1,4 +1,5 @@
 ﻿using CoffeeStore.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -49,6 +50,7 @@ namespace CoffeeStore.Controllers
             {
                 return RedirectToAction("Error", "Home");
             }
+
             // Truyền thông tin từ Cart vào model Order
             model.Customer = customer;
             model.OrderDate = DateTime.Now;
@@ -56,7 +58,6 @@ namespace CoffeeStore.Controllers
             model.TotalAmount = _cart.ComputeTotalValue();
 
             return View(model);
-
         }
 
         [HttpPost]
@@ -79,7 +80,6 @@ namespace CoffeeStore.Controllers
 
                 return RedirectToPage("/Completed", new { orderId = order.OrderID });
             }
-
 
             return View(order);
         }
@@ -107,5 +107,6 @@ namespace CoffeeStore.Controllers
 
             return View(orders);
         }
+
     }
 }
