@@ -7,8 +7,8 @@
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-header">Nhập mã OTP</div>
-                <div class="card-body">
+                <div class="card-header" style="background-color:antiquewhite">Nhập mã OTP</div>
+                <div class="card-body" style="background-color:blanchedalmond">
                     <!-- Hiển thị thông báo lỗi nếu có -->
                     @if (ViewBag.ErrorMessage != null)
                     {
@@ -21,7 +21,7 @@
                             <label for="otpCode" class="form-label">Mã OTP</label>
                             <input type="text" class="form-control" id="otpCode" name="otpCode" placeholder="Nhập mã OTP" required>
                         </div>
-                        <button type="submit" class="text-light btn btn-primary">Xác nhận</button>
+                        <button type="submit" class="text-light btn btn-primary" style="border:0px;background-color:brown">Xác nhận</button>
                     </form>
                 </div>
             </div>

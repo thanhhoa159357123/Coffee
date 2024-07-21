@@ -27,13 +27,16 @@
 
         .dropdown-menu {
             flex-direction: row;
-            min-width: auto; /* Bỏ min-width để phù hợp với nội dung *
+            min-width: auto;
         }
+        /* Bỏ min-width để phù hợp với nội dung */
+
+
     </style>
 </head>
 <body>
     <div class="bg-light text-center">
-        <div class="navbar navbar-light">
+        <div style="background-color:antiquewhite" class="navbar navbar-light">
             <a href="@Url.Action("Index", "Home")" class="text-info navbar-brand">Chill Coffee</a>
             <a href="@Url.Action("Cafe", "Category")" class="text-info navbar-brand">Cà phê</a>
             <a href="@Url.Action("Tea", "Category")" class="text-info navbar-brand">Trà</a>
@@ -50,7 +53,7 @@
             @if (!string.IsNullOrEmpty(ViewBag.CustomerName))
             {
                 <div class="dropdown">
-                    <a class="text-info navbar-brand dropdown-toggle" href="#" id="menuDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="text-info navbar-brand dropdown-toggle" style="background-color:antiquewhite" href="#" id="menuDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <span id="loggedInUser">@ViewBag.CustomerName</span> <!-- Hiển thị số điện thoại -->
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="menuDropdown">
@@ -62,7 +65,7 @@
             }
             else
             {
-                <a href=@Url.Action("Login","Login") class="text-info btn btn-light"><i class="fas fa-user"></i></a>
+                <a href=@Url.Action("Login","Login") class="text-info btn btn-light" style="background-color:antiquewhite"><i class="fas fa-user"></i></a>
             }
         </div>
     </div>

@@ -9,19 +9,23 @@
 
     .card {
         width: 300px;
-        height: 100%;
+        height: auto;
+        border: none; /* Loại bỏ đường kẻ khung */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Loại bỏ bóng */
     }
 
-    /* Thêm CSS để xóa bỏ gạch chân ở chữ trong liên kết */
     a {
         text-decoration: none;
         color: inherit;
     }
 
-        a:hover {
-            text-decoration: none;
-            color: inherit;
-        }
+    a:hover {
+        text-decoration: none;
+        color: inherit;
+    }
+    .name {
+        font-size: 18px;
+    }
 </style>
 
 <div class="card card-outline-primary m-1 p-1">
@@ -30,33 +34,32 @@
     </a>
     <div class="bg-faded p-1">
         <h4>
-            <a asp-controller="Category" asp-action="ProductDetail" asp-route-id="@Model?.ProductID">
+            <a class="name" asp-controller="Category" asp-action="ProductDetail" asp-route-id="@Model?.ProductID">
                 @Model?.Name
             </a>
-            <span class="badge rounded-pill bg-info text-white" style="float:right">
+        </h4>
+        <div class="d-flex justify-content-between align-items-center">
+            <span class="badge rounded-pill bg-info text-white">
                 <small>@Model?.Price.ToString("N0")</small>
             </span>
-        </h4>
-    </div>
-    @if (!string.IsNullOrEmpty(ViewBag.PhoneNumber))
-    {
-        <form id="form-@Model?.ProductID" asp-page="/Cart" method="post">
-            <input type="hidden" name="productId" value="@Model?.ProductID" />
-            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
-            <span class="card-text p-1">
-                <button type="submit" class="btn btn-info btn-sm pull-right text-white" style="float:right">
+            @if (!string.IsNullOrEmpty(ViewBag.PhoneNumber))
+            {
+                <form id="form-@Model?.ProductID" asp-page="/Cart" method="post" class="d-inline">
+                    <input type="hidden" name="productId" value="@Model?.ProductID" />
+                    <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+                    <button type="submit" class="btn btn-info btn-sm text-white">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </form>
+            }
+            else
+            {
+                <button type="button" class="btn btn-primary btn-sm text-white" onclick="alert('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.');">
                     <i class="fas fa-plus"></i>
                 </button>
-            </span>
-        </form>
-    }
-    else
-    {
-        <span class="card-text p-1">
-            <button type="button" class="btn btn-primary btn-sm pull-right text-white" style="float:right" onclick="alert('Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.');">
-                <i class="fas fa-plus"></i>
-            </button>
-        </span>
-    }
-
+            }
+        </div>
+    </div>
 </div>
+
+

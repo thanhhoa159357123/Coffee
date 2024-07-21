@@ -18,7 +18,7 @@ namespace CoffeeStore.Models
                     new Product
                     {
                         Name = "Cà phê sữa đá",
-                        Description = "Mang lại hương vị đậm đà từ cafe, sự ngọt dịu từ sữa.",
+                        Description = "Cà phê Đắk Lắk nguyên chất được pha phin truyền thống kết hợp với sữa đặc tạo nên hương vị đậm đà, hài hòa giữa vị ngọt đầu lưỡi và vị đắng thanh thoát nơi hậu vị.",
                         Price = 29000,
                         Category = "Cà phê",
                         ImageURL = "images/cafe-sua.png"
@@ -26,7 +26,7 @@ namespace CoffeeStore.Models
                     new Product
                     {
                         Name = "Cà phê đen đá",
-                        Description = "Mang lại hương vị đậm đà từ cafe.",
+                        Description = "Không ngọt ngào như Bạc sỉu hay Cà phê sữa, Cà phê đen mang trong mình phong vị trầm lắng, thi vị hơn. Người ta thường phải ngồi rất lâu mới cảm nhận được hết hương thơm ngào ngạt, phảng phất mùi cacao và cái đắng mượt mà trôi tuột xuống vòm họng.",
                         Price = 25000,
                         Category = "Cà phê",
                         ImageURL = "images/cafe-den.png"
@@ -34,58 +34,66 @@ namespace CoffeeStore.Models
                     new Product
                     {
                         Name = "Bạc xỉu",
-                        Description = "Mang lại hương vị đậm đà từ vị sữa, thơm mùi cafe.",
+                        Description = "Bạc sỉu chính là \"Ly sữa trắng kèm một chút cà phê\". Thức uống này rất phù hợp những ai vừa muốn trải nghiệm chút vị đắng của cà phê vừa muốn thưởng thức vị ngọt béo ngậy từ sữa.",
                         Price = 25000,
                         Category = "Cà phê",
                         ImageURL = "images/bac_xiu.png"
                     },
                     new Product
                     {
+                        Name = "Trà xanh Espresso Marble",
+                        Description = "Cho ngày thêm tươi, tỉnh, êm, mượt với Trà Xanh Espresso Marble. Đây là sự mai mối bất ngờ giữa trà xanh Tây Bắc vị mộc và cà phê Arabica Đà Lạt. Muốn ngày thêm chút highlight, nhớ tìm đến sự bất ngờ này bạn nhé!",
+                        Price = 49000,
+                        Category = "Trà",
+                        ImageURL = "images/tra-xanh-espresso-marble.png"
+                    },
+                    new Product
+                    {
                         Name = "Trà đào cam sả",
-                        Description = "Vị ngọt thanh của đào, vị thơm của vỏ cam và hương nồng của sả.",
-                        Price = 50000,
+                        Description = "Vị thanh ngọt của đào, vị chua dịu của Cam Vàng nguyên vỏ, vị chát của trà đen tươi được ủ mới mỗi 4 tiếng, cùng hương thơm nồng đặc trưng của sả chính là điểm sáng làm nên sức hấp dẫn của thức uống này.",
+                        Price = 49000,
                         Category = "Trà",
                         ImageURL = "images/tra-dao-cam-sa.png"
                     },
                     new Product
-                    { 
-                        Name = "Trà olong đào",
-                        Description = "Vị ngọt thanh của đào và hương nồng của trà olong.",
-                        Price = 59000,
+                    {
+                        Name = "Oolong tứ quý vải",
+                        Description = "Đậm hương trà, thanh mát sắc xuân với Oolong Tứ Quý Vải. Cảm nhận hương hoa đầu mùa, hòa quyện cùng vị vải chín mọng căng tràn sức sống.",
+                        Price = 49000,
                         Category = "Trà",
-                        ImageURL = "images/tra-olong-dao.png"
+                        ImageURL = "images/Oolong-tu-quy-vai.png"
                     },
                     new Product
                     {
-                        Name = "Trà đào sữa",
-                        Description = "Vị ngọt của sữa và đào.",
-                        Price = 59000,
+                        Name = "Oolong tứ quý kim quất trân châu",
+                        Description = "Đậm hương trà, sảng khoái du xuân cùng Oolong Tứ Quý Kim Quất Trân Châu. Vị nước cốt kim quất tươi chua ngọt, thêm trân châu giòn dai.",
+                        Price = 49000,
                         Category = "Trà",
-                        ImageURL = "images/tra-dao-sua.png"
+                        ImageURL = "images/Oolong-tu-quy-kim-quat-tran-chau.png"
                     },
                     new Product
                     {
-                        Name = "Đá xay cafe",
-                        Description = "Sự mát lạnh mang hương vị cafe và ngọt bùi của kem cheese.",
+                        Name = "Frosty bánh kem dâu",
+                        Description = "Bồng bềnh như một đám mây, Đá Xay Frosty Bánh Kem Dâu vừa ngon mắt vừa chiều vị giác bằng sự ngọt ngào. Bắt đầu bằng cái chạm môi với lớp kem whipping cream, cảm nhận ngay vị beo béo lẫn sốt dâu thơm lừng. Sau đó, hút một ngụm là cuốn khó cưỡng bởi đá xay mát lạnh quyện cùng sốt dâu ngọt dịu. Lưu ý: Khuấy đều phần đá xay trước khi dùng",
                         Price = 59000,
                         Category = "Đá xay",
-                        ImageURL = "images/da-xay-cafe.png"
+                        ImageURL = "images/frosty-banh-kem-dau.png"
                     },
                     new Product
                     {
-                        Name = "Đá xay matcha",
-                        Description = "Sự mát lạnh mang hương vị matcha và ngọt bùi của kem cheese.",
+                        Name = "Frosty Choco Chip",
+                        Description = "Đá Xay Frosty Choco Chip, thử là đã! Lớp whipping cream bồng bềnh, beo béo lại có thêm bột sô cô la và sô cô la chip trên cùng. Gấp đôi vị ngon với sô cô la thật xay với đá sánh mịn, đậm đà đến tận ngụm cuối cùng.",
                         Price = 59000,
                         Category = "Đá xay",
-                        ImageURL = "images/da-xay-matcha.png"
+                        ImageURL = "images/frosty-choco-chip.png"
                     },
                     new Product
                     {
-                        Name = "Đá xay Chocolate",
-                        Description = "Sự mát lạnh mang hương vị sô cô la và ngọt bùi của kem cheese.",
-                        Price = 60000,
+                        Name = "Frosty Caramel Arabica",
+                        Description = "Caramel ngọt thơm quyện cùng cà phê Arabica Cầu Đất đượm hương gỗ thông, hạt dẻ và nốt sô cô la đặc trưng tạo nên Đá Xay Frosty Caramel Arabica độc đáo chỉ có tại Nhà. Cực cuốn với lớp whipping cream béo mịn, thêm thạch cà phê giòn ngon bắt miệng.\r\n\r\n",
+                        Price = 59000,
                         Category = "Đá xay",
-                        ImageURL = "images/da-xay-choco.png"
+                        ImageURL = "images/frosty-caramel-arabica.png"
                     }
                 );
 

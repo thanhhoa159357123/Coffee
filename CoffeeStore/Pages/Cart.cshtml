@@ -3,7 +3,7 @@
 @using System.Globalization
 @{
     ViewData["Title"] = "Giỏ hàng của bạn";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "_CartLayout.cshtml";
 }
 <style>
 
@@ -17,7 +17,7 @@
 <h4 class="title text-center mt-3 rainbow-title">
     Giỏ hàng của bạn <i class="p-1 fas fa-shopping-cart"></i>
 </h4>
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped" style="background-color:antiquewhite">
     <thead>
         <tr>
             <th>Số lượng</th>
@@ -61,6 +61,6 @@
     </tfoot>
 </table>
 <div class="text-center">
-    <a class="btn btn-primary rainbow-title " href="@Model?.ReturnUrl">Tiếp tục mua hàng</a>
-    <a class="btn btn-primary rainbow-title" asp-action="Checkout" asp-controller="Order">Hoàn thành đơn hàng</a>
+    <a class="btn btn-primary" style="background-color:brown;border:0px;" href="@Model?.ReturnUrl">Tiếp tục mua hàng</a>
+    <a class="btn btn-primary" style="background-color:brown ;border:0px ;" asp-action="Checkout" asp-controller="Order">Hoàn thành đơn hàng</a>
 </div>
